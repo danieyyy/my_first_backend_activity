@@ -127,10 +127,9 @@ app.get("/books", (req, res) => {
     const user = LoginProfiles.find((profile) => profile.username === username && profile.password === password);
   
     if (user) {
-      const token = generateToken(user);
-      res.json({ token });
+      res.json({ message: "Success" });
     } else {
-      res.status(401).json({ message: "Invalid username or password" });
+      res.status(401).json({ message: "Failed" });
     }
   });
 
@@ -150,6 +149,9 @@ app.get("/books", (req, res) => {
     }
   });
 
+  app.get('/test', verify, (req, res)=>{
+    res.send('Hi')
+})
 
   app.listen(5000)
     console.log("Server is running on port 5000");
